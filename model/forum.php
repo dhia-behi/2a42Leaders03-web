@@ -7,8 +7,9 @@ class forum{
    private $message;
    private $image;
    private $date;
+   private $rate;
 
-    public $userAttributeCount=6;
+    public $userAttributeCount=7;
 
     function getcategorie(){
         return $this->categorie;
@@ -25,14 +26,21 @@ class forum{
     function getdate(){
         return $this->date;
     }
+    function getrate(){
+        return $this->rate;
+    }
+    function setrate(int $rate){
+        $this->rate = $rate;
+    }
 
     
-    function __construct($categorie,$titre,$message,$image,$date){
+    function __construct($categorie,$titre,$message,$image,$date,$rate){
         $this->categorie = $categorie;
         $this->titre = $titre;
         $this->image = $image;
         $this->message = $message;
         $this->date = $date;
+        $this->rate=$rate;
     }
     
 

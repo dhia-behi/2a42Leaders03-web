@@ -32,7 +32,6 @@ class commentaireC   {
         echo "Error: " . $e->getMessage();
     }
 }
-
     public function alllike()
     {
       $sql = "SELECT likee FROM commentaire";

@@ -5,7 +5,7 @@
     
     if(isset($_POST['categorie'])){
 
-        $forum1 =  new forum($_POST['categorie'],$_POST['titre'],$_POST['message'],$_POST['image'],$_POST['date']);
+        $forum1 =  new forum($_POST['categorie'],$_POST['titre'],$_POST['message'],$_POST['image'],$_POST['date'],$_POST['rate']=0);
         $r=new forumC();
         
         $r->addforum($forum1);
@@ -85,7 +85,7 @@
                             <br>	
                             <div class="card"><div class="card-body">
 							
-							<form method="POST" id="Form">
+							<form method="POST" id="Form" >
 							<div class="row">
                             <div class="col-lg-12">
 									<div class="form-group">
@@ -152,7 +152,7 @@
 								<h6>Newsletter</h6>
 								<p>You can trust us. we only send promo offers, not a single spam.</p>
 								<div id="mc_embed_signup">
-									<form id="Form" class="form-inline">
+									<form target="_blank" novalidate="true" action="https://spondonit.us12.list-manage.com/subscribe/post?u=1462626880ade1ac87bd9c93a&amp;id=92a4423d01" method="get" class="form-inline">
 
 										<div class="form-group row" style="width: 100%">
 											<div class="col-lg-8 col-md-12">

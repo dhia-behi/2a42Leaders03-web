@@ -19,6 +19,7 @@ if (
 			$_POST['message'],
 			$_POST['image'],
 			$_POST['date'],
+			$_POST['rate']=0,
 		);
         $forumC->updateforum($forum,$id);
         header('Location:afficher.php');

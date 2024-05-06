@@ -4,7 +4,7 @@ class forumC   {
     
     public function addforum($forum)
     {
-      $sql = "INSERT INTO forum VALUES (NULL, :categorie, :titre, :message, :image, :date)";
+      $sql = "INSERT INTO forum VALUES (NULL, :categorie, :titre, :message, :image, :date,:rate)";
       $db = config::getConnexion();
       try {
         $query = $db->prepare($sql);
@@ -14,6 +14,7 @@ class forumC   {
           "message" => $forum->getmessgae(),
           "image" => $forum->getimage(),
           "date" => $forum->getdate(),
+          "rate"=> 0
         ]);
       } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
@@ -22,7 +23,7 @@ class forumC   {
   
     public function updateforum($forum,$id)
     {
-      $sql = "UPDATE forum SET categorie=:categorie,titre=:titre,message=:message,image=:image,date=:date WHERE id = :id";
+      $sql = "UPDATE forum SET categorie=:categorie,titre=:titre,message=:message,image=:image,date=:date,rate=:rate WHERE id = :id";
       $db = config::getConnexion();
       try {
         $query = $db->prepare($sql);
@@ -33,13 +34,13 @@ class forumC   {
           "message" => $forum->getmessgae(),
           "image" => $forum->getimage(),
           "date" => $forum->getdate(),
+          "rate" => $forum->getrate(),
         ]);
       } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
       }
     }
-  
-    public function deleteforum($id)
+        public function deleteforum($id)
     {
       $sql = "DELETE FROM forum WHERE id = :id";
       $db = config::getConnexion();

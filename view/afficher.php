@@ -156,6 +156,29 @@ if (isset($_GET['sort'])) {
 									<p>
 									<?php echo $row['message']; ?>
 									</p>
+								<div class="mb-3">
+								<?php 
+// Check the value of $row['rate'] and display stars accordingly
+if($row['rate'] == 0){
+    echo '<img src="img/stars/0star.png" alt="0 stars">';
+} 
+if($row['rate'] == 1){
+    echo '<img src="img/stars/1star.png" alt="1 star">';
+} 
+if($row['rate'] == 2){
+    echo '<img src="img/stars/2star.png" alt="2 stars">';
+} 
+if($row['rate'] == 3){
+    echo '<img src="img/stars/3star.jpg" alt="3 stars">';
+} 
+if($row['rate'] == 4){
+    echo '<img src="img/stars/4star.png" alt="4 stars">';
+} 
+if($row['rate'] == 5){
+    echo '<img src="img/stars/5star.png" alt="5 stars">';
+}
+?>
+								</div>
 									<div class="bottom-meta">
 									<div class="user-details row align-items-center">
 										<div class="comment-wrap col-lg-6">
@@ -169,6 +192,10 @@ if (isset($_GET['sort'])) {
 												<li><a href="supprimer_a.php?id=<?php echo $row['id'] ?>">supprimer</i></a></li>
 												<li><a style="margin-left: 5px;" href="ajouterc.php?idarticle=<?php echo $row['id'] ?>">Ajouter Commentaire</i></a></li>
 												<li><a style="margin-left: 5px;" href="afficherc.php?idarticle=<?php echo $row['id'] ?>">Afficher Commentaire</i></a></li>
+												<li><a style="margin-left: 5px;" href="rate.php?idarticle=<?php echo $row['id'] ?>">Rate</i></a></li>
+												<li><a style="margin-left: 5px;" href="sendmail.php?idarticle=<?php echo $row['id'] ?>">Signaler</i></a></li>
+
+												
 											</ul>
 											
 										</div>
