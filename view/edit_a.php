@@ -19,6 +19,9 @@ if (
 			$_POST['email'],
 			$_POST['pass'],
 			$_POST['age'],
+			$user['verif'] = $currentuser['verif'],
+			$user['verif_pass'] = null,
+
 		);
         $userlistC->updateuser($user,$id);
         header('Location:afficher.php');

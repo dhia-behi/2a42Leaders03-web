@@ -4,7 +4,7 @@ class userlistC   {
     
     public function adduser($user)
     {
-      $sql = "INSERT INTO userlist VALUES (NULL, :fullname, :username, :email, :pass, :age)";
+      $sql = "INSERT INTO userlist VALUES (NULL,:fullname, :username, :email, :pass, :age,:verif,:verif_pass)";
       $db = config::getConnexion();
       try {
         $query = $db->prepare($sql);
@@ -14,6 +14,8 @@ class userlistC   {
           "email" => $user->getemail(),
           "pass" => $user->getpass(),
           "age" => $user->getage(),
+          "verif"=>$user->getverification(),
+          "verif_pass" => $user->getverification_pass(),
         ]);
       } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
@@ -101,6 +103,25 @@ class userlistC   {
                 return $user;
             } else {
                 // Invalid username or password
+                return false;
+            }
+        } catch (Exception $e) {
+            echo "Error: " . $e->getMessage();
+            return false;
+        }
+    }
+    public function findUserByemail($email)
+    {
+        $sql = "SELECT * FROM userlist WHERE email = :email";
+        $db = config::getConnexion();
+        try {
+            $query = $db->prepare($sql);
+            $query->execute(['email' => $email]);
+            $user = $query->fetch();
+    
+            if ($user) {
+                return $user;
+            } else {
                 return false;
             }
         } catch (Exception $e) {

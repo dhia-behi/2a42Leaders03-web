@@ -2,35 +2,9 @@
 // login_process.php
 
 require_once "../controller/userlistC.php";
-if (isset($_POST['username'])) {
-    $username = $_POST['username'];
-    $password = $_POST['password'];
+if (isset($_POST['email'])) {
+    $email = $_POST['email'];
 
-    $userlistC = new userlistC();
-    $user = $userlistC->findUserByUsernameAndPassword($username, $password);
-
-    if ($user) {
-        // Check if password matches
-        if ($password === $user['pass']) {
-            // Password matches
-            if ($user['verif'] != null) {
-                die("Please verify your email <a href='email-verification.php?email=" . $user['email'] . "'>from here</a>");
-            } else {
-                session_start();
-                $_SESSION['user'] = $user;
-                header('Location: afficher.php'); // Redirect to the dashboard upon successful login
-                exit();
-            }
-        } else {
-            // Password doesn't match
-            echo '<script>alert("Invalid username or password");</script>';
-            // Redirect back to the login page or handle the error accordingly
-        }
-    } else {
-        // User not found
-        echo '<script>alert("Invalid username or password");</script>';
-        // Redirect back to the login page or handle the error accordingly
-    }
 }
    
 ?>
@@ -42,23 +16,31 @@ if (isset($_POST['username'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
     <link rel="stylesheet" href="style.css">
-    <title>Login</title>
+    <title></title>
 </head>
 <body class="banner-area relative" id="home">
 <section class="pdt-120 pdb-120 mt-5 " >
     <div class="container" style="margin-top: 280px;">
         <div class="card">
             <div class="card-body">
-            <h2>Login</h2>
-        <form method="post" id="Form" >
-        <label for="username">Username:</label><br>
-        <input type="text" id="username" name="username" class="form-control"><br>
-        <label for="password">Password:</label><br>
-        <input type="password" id="password" name="password" class="form-control"><br><br>
-        <input type="submit" class="btn btn-secondary" value="Login">
-                </form>
-                <div class="mt-3"><p>No Account ?   <a href="registration.php">SignUp Here</a></p></div>
-                <div class="mt-3"><a href="mailinput.php">Mot de passe oubliée ?</a></div>
+            <h2>Enter your email here </h2>
+            <form method="post" id="Form">
+    <label for="email">E-mail:</label><br>
+    <input type="text" id="emailInput" name="email" class="form-control"><br>
+    <input type="submit" class="btn btn-secondary" value="Send">
+</form>
+
+<script>
+    document.getElementById('Form').addEventListener('submit', function(event) {
+        event.preventDefault(); // prevent the form from submitting
+        
+        // Get the email input value
+        var email = document.getElementById('emailInput').value;
+
+        // Redirect to resetpass.php with the email parameter
+        window.location.href = 'resetpass.php?email=' + encodeURIComponent(email);
+    });
+</script>
         </div>
         
     </div>

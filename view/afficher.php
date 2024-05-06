@@ -1,9 +1,10 @@
 <?php
 include_once "../controller/userlistC.php";
 
-
+session_start();
 $UserC= new userlistC();
 $var=$UserC->allusers();
+$user1 = $_SESSION['user'];
 //Tri code SQL
 if (isset($_GET['sort'])) {
     $sort = $_GET['sort'];
@@ -20,6 +21,17 @@ if (isset($_GET['sort'])) {
     } catch (Exception $e) {
         echo "Error: " . $e->getMessage();
     }
+}
+if(isset($_GET['logout'])) {
+    // Unset all session variables
+    $_SESSION = array();
+
+    // Destroy the session
+    session_destroy();
+
+    // Redirect to the login page or any other desired page
+    header("Location: login.php");
+    exit;
 }
 // recherche code SQL
 if (isset($_POST['choix'])) {
@@ -88,7 +100,8 @@ if (isset($_POST['choix'])) {
 								<li><a href="single.html">single</a></li>
 				            </ul>
 				          </li>
-				          <li><a class="ticker-btn" href="login.php">LogOut</a></li>				          				          
+						  <li><a class="ticker-btn" href="profil.php">Profil</a></li>	
+				          <li><a class="ticker-btn" href="?logout=true">LogOut</a></li>				          				          
 				        </ul>
 				      </nav><!-- #nav-menu-container -->		    		
 			    	</div>
@@ -104,7 +117,7 @@ if (isset($_POST['choix'])) {
 								<span>User</span> List		
 							</h1>
                             <br>
-							<div class="d-flex justify-content-between mt-5">
+							<div class="d-flex justify-content-between">
 								<!-- Tri Code html -->
 							<form method="GET" action="" class="mb-3">
                					 <input type="hidden" name="sort" value="asc">
@@ -254,7 +267,7 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
 			<script src="js/jquery.nice-select.min.js"></script>			
 			<script src="js/parallax.min.js"></script>		
 			<script src="js/mail-script.js"></script>	
-			<script src="js/main.js"></script>	
+			<script src="js/main.js"></script>
 		</body>
 	</html>
 

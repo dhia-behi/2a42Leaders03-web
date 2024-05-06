@@ -1,18 +1,3 @@
-<?php 
-    // 
-    include_once "../model/userlist.php";
-    include_once "../controller/userlistC.php";
-    
-    if(isset($_POST['fullname'])){
-
-        $user1 =  new userlist($_POST['fullname'],$_POST['username'],$_POST['email'],$_POST['pass'],$_POST['age']);
-        $r=new userlistC();
-        
-        $r->adduser($user1);
-		 header('Location:login.php');
-    }
-    else {
-        ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,7 +14,7 @@
     <div class="card">
         <div class="card-body">
 		<h2>Register</h2>
-        <form action="registration.php" method="post" id="Form">
+        <form action="verifmail.php" method="post" id="Form">
             <div class="form-group">
 			<label for="username">FullName</label><br>
                 <input type="text" class="form-control mb-2" name="fullname" id="fullname">
@@ -133,4 +118,3 @@
 						</script>
 </body>
 </html>
-<?php } ?> 
